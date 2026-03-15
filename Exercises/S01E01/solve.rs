@@ -48,7 +48,7 @@ async fn run() -> Result<()> {
 
     let verification_result = verifier.verify(TASK_NAME, &answer).await?;
     println!("Verification response:");
-    println!("{}", serde_json::to_string_pretty(&verification_result)?);    }
+    println!("{}", serde_json::to_string_pretty(&verification_result)?);
 
     Ok(())
 }

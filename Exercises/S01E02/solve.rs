@@ -95,8 +95,8 @@ async fn run() -> Result<()> {
     let suspects = suspects
         .map(|tagged_people| select_transport_people(&tagged_people))
         .unwrap_or_default();
-    let suspects = if suspects.is_empty() {
-        let candidates = filter_candidates(&people)?;
+    let suspects: Vec<Suspect> = if suspects.is_empty() {
+       let candidates = filter_candidates(&people)?;
         let openai = OpenAiWrapper::from_env()?;
         let model = resolve_model_for_provider(BASE_MODEL)?;
         let tagged_candidates = classify_jobs(&openai, &cache_path, &model, &candidates).await?;
@@ -152,7 +152,10 @@ fn load_environment() -> Result<()> {
 }
 
 async fn fetch_power_plants(client: &Client, api_key: &str) -> Result<Vec<PowerPlant>> {
-    let url = format!("https://hub.ag3nts.org/data/{}/findhim_locations.json", api_key);
+    let url = format!(
+        "https://hub.ag3nts.org/data/{}/findhim_locations.json",
+        api_key
+    );
     let response = client
         .get(&url)
         .send()
@@ -209,15 +212,16 @@ fn parse_power_plant_entry(value: &Value) -> Option<PowerPlant> {
     parse_power_plant_entry_with_fallback_code(value, None)
 }
 
-fn parse_power_plant_entry_with_fallback_code(value: &Value, fallback_code: Option<&str>) -> Option<PowerPlant> {
+fn parse_power_plant_entry_with_fallback_code(
+    value: &Value,
+    fallback_code: Option<&str>,
+) -> Option<PowerPlant> {
     let object = value.as_object()?;
     let code = get_string_field(object, &["code", "powerPlant", "id"])
         .or_else(|| fallback_code.map(str::to_owned))?;
     let coordinates = get_number_field(object, &["latitude", "lat", "y"])
         .zip(get_number_field(object, &["longitude", "lon", "lng", "x"]))
-        .or_else(|| {
-            fallback_code.and_then(lookup_city_coordinates)
-        })?;
+        .or_else(|| fallback_code.and_then(lookup_city_coordinates))?;
 
     Some(PowerPlant {
         code,
@@ -253,21 +257,17 @@ fn get_string_field(
     })
 }
 
-fn get_number_field(
-    object: &serde_json::Map<String, Value>,
-    field_names: &[&str],
-) -> Option<f64> {
+fn get_number_field(object: &serde_json::Map<String, Value>, field_names: &[&str]) -> Option<f64> {
     field_names.iter().find_map(|field_name| {
         object.get(*field_name).and_then(|value| {
-            value.as_f64().or_else(|| value.as_str().and_then(|text| text.parse::<f64>().ok()))
+            value
+                .as_f64()
+                .or_else(|| value.as_str().and_then(|text| text.parse::<f64>().ok()))
         })
     })
 }
 
-fn get_i32_field(
-    object: &serde_json::Map<String, Value>,
-    field_names: &[&str],
-) -> Option<i32> {
+fn get_i32_field(object: &serde_json::Map<String, Value>, field_names: &[&str]) -> Option<i32> {
     field_names.iter().find_map(|field_name| {
         object.get(*field_name).and_then(|value| {
             value
@@ -386,7 +386,9 @@ async fn find_best_match(
         }
 
         for location in locations {
-            if let Some((power_plant, distance_km)) = find_nearest_power_plant(&location, power_plants) {
+            if let Some((power_plant, distance_km)) =
+                find_nearest_power_plant(&location, power_plants)
+            {
                 let should_replace = match &best_match {
                     Some(current_best) => distance_km < current_best.distance_km,
                     None => true,
@@ -429,15 +431,12 @@ async fn fetch_suspect_locations(
             )
         })?;
 
-    let body_text = response
-        .text()
-        .await
-        .with_context(|| {
-            format!(
-                "Failed to read location response for {} {}",
-                suspect.name, suspect.surname
-            )
-        })?;
+    let body_text = response.text().await.with_context(|| {
+        format!(
+            "Failed to read location response for {} {}",
+            suspect.name, suspect.surname
+        )
+    })?;
 
     let body_value = serde_json::from_str::<Value>(&body_text).with_context(|| {
         format!(
@@ -488,15 +487,12 @@ async fn fetch_access_level(client: &Client, api_key: &str, suspect: &Suspect) -
             )
         })?;
 
-    let body_text = response
-        .text()
-        .await
-        .with_context(|| {
-            format!(
-                "Failed to read access level response for {} {}",
-                suspect.name, suspect.surname
-            )
-        })?;
+    let body_text = response.text().await.with_context(|| {
+        format!(
+            "Failed to read access level response for {} {}",
+            suspect.name, suspect.surname
+        )
+    })?;
 
     let body_value = serde_json::from_str::<Value>(&body_text).with_context(|| {
         format!(
@@ -527,7 +523,10 @@ async fn fetch_access_level(client: &Client, api_key: &str, suspect: &Suspect) -
     Ok(body.access_level)
 }
 
-fn find_nearest_power_plant(location: &Location, power_plants: &[PowerPlant]) -> Option<(String, f64)> {
+fn find_nearest_power_plant(
+    location: &Location,
+    power_plants: &[PowerPlant],
+) -> Option<(String, f64)> {
     power_plants
         .iter()
         .map(|power_plant| {
