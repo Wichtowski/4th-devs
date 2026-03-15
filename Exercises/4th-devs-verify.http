@@ -1,0 +1,54 @@
+@baseUrl = https://hub.ag3nts.org
+
+### Verify example task
+# @name verify-string
+POST {{baseUrl}}/verify
+Content-Type: application/json
+
+{
+  "apikey": "{{$dotenv DEVS_KEY}}",
+  "task": "taskname",
+  "answer": ""
+}
+
+###
+
+### Verify — task "accesslevel" (S01E03, answer: object)
+# @name verify-accesslevel
+POST {{baseUrl}}/api/accesslevel
+Content-Type: application/json
+
+{
+"apikey": "{{$dotenv DEVS_KEY}}",
+"name": "Martin",
+"surname": "Handford",
+"birthYear": 1987
+}
+
+
+### Verify — task "transport" (S01E03)
+# @name proxy
+POST {{baseUrl}}/verify
+Content-Type: application/json
+
+{
+  "apikey": "{{$dotenv DEVS_KEY}}",
+  "task": "proxy",
+  "answer": {
+    "url": "https://.ngrok-free.dev",
+    "sessionID": "session1"
+  }
+}
+
+### HELP S01E05
+# @name help-s01e05
+POST {{baseUrl}}/verify
+Content-Type: application/json
+
+{
+  "apikey": "{{$dotenv DEVS_KEY}}",
+  "task": "railway",
+  "answer": {
+    "action": "help"
+  }
+}

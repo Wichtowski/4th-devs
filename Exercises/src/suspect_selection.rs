@@ -3,7 +3,7 @@ use crate::csv_service::CsvService;
 use crate::llm_payload_service::{JsonSchemaFormat, LlmPayloadService};
 use crate::openai_wrapper::{OpenAiWrapper, extract_response_text};
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::json;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::path::Path;
 use tokio::fs;
