@@ -13,12 +13,12 @@ const DOC_BASE: &str = "https://hub.ag3nts.org/dane/doc/";
 const MODEL: &str = "gpt-5.4";
 
 fn docs_dir() -> PathBuf {
-    PathBuf::from("S01E04/docs")
+    PathBuf::from("E04/docs")
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenvy::dotenv().ok();
+    exercises::env::load_shared_env().ok();
 
     tracing_subscriber::fmt()
         .with_env_filter(

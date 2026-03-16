@@ -112,7 +112,7 @@ struct ProxyResponse {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenvy::dotenv().ok();
+    exercises::env::load_shared_env().ok();
 
     tracing_subscriber::fmt()
         .with_env_filter(

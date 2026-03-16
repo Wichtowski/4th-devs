@@ -1,6 +1,6 @@
 use anyhow::{Context, Result, anyhow};
-use dotenvy::from_filename_override;
 use exercises::aidevs_verification::AiDevsVerification;
+use exercises::env::load_shared_env;
 use exercises::openai_wrapper::{OpenAiWrapper, resolve_model_for_provider};
 use exercises::suspect_selection::{
     classify_jobs, filter_candidates, load_tagged_suspects, parse_people, select_transport_people,
@@ -78,12 +78,12 @@ async fn main() {
 }
 
 async fn run() -> Result<()> {
-    load_environment()?;
+    load_shared_env()?;
     let _forwarded_args = env::args().skip(1).collect::<Vec<_>>();
 
     let base_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let exercise_s01e01_dir = base_dir.join("S01E01");
-    let csv_path = base_dir.join("S01E01/people.csv");
+    let exercise_s01e01_dir = base_dir.join("E01");
+    let csv_path = base_dir.join("E01/people.csv");
     let cache_path = exercise_s01e01_dir.join("job-tags-cache.json");
     let suspects_path = exercise_s01e01_dir.join("suspects.json");
 
@@ -135,18 +135,6 @@ async fn run() -> Result<()> {
     let verification_result = verifier.verify(TASK_NAME, &answer).await?;
     println!("\nVerification response:");
     println!("{}", serde_json::to_string_pretty(&verification_result)?);
-
-    Ok(())
-}
-
-fn load_environment() -> Result<()> {
-    let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let root_env_path = manifest_dir.join(".env");
-
-    if root_env_path.exists() {
-        from_filename_override(&root_env_path)
-            .with_context(|| format!("Failed to load {}", root_env_path.display()))?;
-    }
 
     Ok(())
 }

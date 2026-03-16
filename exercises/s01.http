@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 
-### Verify — task "accesslevel" (S01E03, answer: object)
+### Verify — task "accesslevel" (E03, answer: object)
 # @name verify-accesslevel
 POST {{baseUrl}}/api/accesslevel
 Content-Type: application/json
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 
-### Verify — task "transport" (S01E03)
+### Verify — task "transport" (E03)
 # @name proxy
 POST {{baseUrl}}/verify
 Content-Type: application/json
@@ -40,8 +40,8 @@ Content-Type: application/json
   }
 }
 
-### HELP S01E05
-# @name help-s01e05
+### HELP E05
+# @name help-e05
 POST {{baseUrl}}/verify
 Content-Type: application/json
 

@@ -1,4 +1,5 @@
 pub mod aidevs_verification;
+pub mod env;
 pub mod csv_service;
 pub mod llm_payload_service;
 pub mod openai_wrapper;

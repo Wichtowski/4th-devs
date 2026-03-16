@@ -6,23 +6,23 @@ fn main() -> ExitCode {
     let Some(target) = args.next() else {
         eprintln!("Usage: cargo run <exercise-directory> [-- <exercise-args...>]");
         eprintln!("Examples:");
-        eprintln!("  cargo run S01E01");
-        eprintln!("  cargo run S01E02");
-        eprintln!("  cargo run S01E03");
-        eprintln!("  cargo run S01E04");
-        eprintln!("  cargo run S01E05");
+        eprintln!("  cargo run E01");
+        eprintln!("  cargo run E02");
+        eprintln!("  cargo run E03");
+        eprintln!("  cargo run E04");
+        eprintln!("  cargo run E05");
         return ExitCode::from(2);
     };
 
     let binary = match normalize_target(&target).as_str() {
-        "s01e01" => "s01e01",
-        "s01e02" => "s01e02",
-        "s01e03" => "s01e03",
-        "s01e04" => "s01e04",
-        "s01e05" => "s01e05",
+        "e01" => "e01",
+        "e02" => "e02",
+        "e03" => "e03",
+        "e04" => "e04",
+        "e05" => "e05",
         unknown => {
             eprintln!("Unknown exercise target: {unknown}");
-            eprintln!("Available targets: S01E01, S01E02, S01E03, S01E04, S01E05");
+            eprintln!("Available targets: E01, E02, E03, E04, E05");
             return ExitCode::from(2);
         }
     };
