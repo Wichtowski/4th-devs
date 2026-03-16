@@ -1,0 +1,65 @@
+[IMAGE ANALYSIS: trasy-wylaczone.png]
+Poniżej dokładna transkrypcja tabeli z obrazu:
+
+| Kod trasy | Przebieg | Powód wyłączenia | Data wyłączenia | Prognoza reaktywacji |
+|---|---|---|---|---|
+| X-01 | Gdańsk - Żarnowiec | NIEJAWNY (Dyrektywa Specjalna 7.7) | Rok Systemu 0 | (oczekuje na testy - 80 km trasy) |
+| X-02 | Wejherowo - Żarnowiec (odgałęzienie) | NIEJAWNY (Dyrektywa Specjalna 7.7) | Rok Systemu 0 | BRAK |
+| X-03 | Lębork - Żarnowiec (odgałęzienie pomocnicze) | NIEJAWNY (Dyrektywa Specjalna 7.7) | Rok Systemu 0 | BRAK |
+| X-04 | Krokowa - Żarnowiec (szlak techniczny) | NIEJAWNY (Dyrektywa Specjalna 7.7) | Rok Systemu 0 | BRAK |
+| X-05 | Legnica – Jawor | Zniszczenie mostu na Kaczawie | Rok Systemu 1 | Rok Systemu 16 (planowany) |
+| X-06 | Przemyśl - granica wschodnia | Strefa buforowa | Rok Systemu 0 | BRAK |
+| X-07 | Szczecin - granica zachodnia | Strefa buforowa | Rok Systemu 0 | BRAK |
+| X-08 | Tarnów - Nowy Sącz | Osunięcie terenu | Rok Systemu 4 | Nieokreślona |
+
+Pełny tekst z obrazu, linia po linii:
+
+- Kod trasy
+- Przebieg
+- Powód wyłączenia
+- Data wyłączenia
+- Prognoza reaktywacji
+- X-01
+- Gdańsk - Żarnowiec
+- NIEJAWNY (Dyrektywa Specjalna 7.7)
+- Rok Systemu 0
+- (oczekuje na testy - 80 km trasy)
+- X-02
+- Wejherowo - Żarnowiec (odgałęzienie)
+- NIEJAWNY (Dyrektywa Specjalna 7.7)
+- Rok Systemu 0
+- BRAK
+- X-03
+- Lębork - Żarnowiec (odgałęzienie pomocnicze)
+- NIEJAWNY (Dyrektywa Specjalna 7.7)
+- Rok Systemu 0
+- BRAK
+- X-04
+- Krokowa - Żarnowiec (szlak techniczny)
+- NIEJAWNY (Dyrektywa Specjalna 7.7)
+- Rok Systemu 0
+- BRAK
+- X-05
+- Legnica – Jawor
+- Zniszczenie mostu na Kaczawie
+- Rok Systemu 1
+- Rok Systemu 16 (planowany)
+- X-06
+- Przemyśl - granica wschodnia
+- Strefa buforowa
+- Rok Systemu 0
+- BRAK
+- X-07
+- Szczecin - granica zachodnia
+- Strefa buforowa
+- Rok Systemu 0
+- BRAK
+- X-08
+- Tarnów - Nowy Sącz
+- Osunięcie terenu
+- Rok Systemu 4
+- Nieokreślona
+
+Uwaga dotycząca dokładności znaków:
+- W większości wierszy użyty jest myślnik `-`
+- W wierszu `X-05` występuje dłuższa kreska: `Legnica – Jawor`

@@ -1,0 +1,13 @@
+@baseUrl = https://hub.ag3nts.org
+
+### Verify example task
+# @name verify-string
+POST {{baseUrl}}/verify
+Content-Type: application/json
+
+{
+  "apikey": "{{$dotenv DEVS_KEY}}",
+  "task": "taskname",
+  "answer": ""
+}
+
