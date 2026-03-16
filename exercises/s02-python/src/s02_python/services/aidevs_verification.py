@@ -4,6 +4,17 @@ from typing import Any
 
 VERIFY_URL = "https://hub.ag3nts.org/verify"
 
+class VerificationError(Exception):
+    """Raised when the hub returns a non-success response."""
+
+    def __init__(self, status_code: int, body: dict[str, Any]):
+        self.status_code = status_code
+        self.body = body
+        self.code = body.get("code", -1)
+        self.message = body.get("message", "Unknown error")
+        self.debug = body.get("debug", {})
+        super().__init__(f"[{status_code}] ({self.code}) {self.message}")
+
 class AiDevsVerification:
     def __init__(self, api_key: str):
         self.api_key = api_key
@@ -15,7 +26,7 @@ class AiDevsVerification:
             raise ValueError("Missing or empty DEVS_KEY in environment")
         return cls(api_key)
 
-    def verify(self, task: str, answer: Any) -> dict | str:
+    def verify(self, task: str, answer: Any) -> dict[str, Any]:
         if not task.strip():
             raise ValueError("Task cannot be empty")
 
@@ -27,10 +38,12 @@ class AiDevsVerification:
 
         response = requests.post(VERIFY_URL, json=payload)
 
-        if not response.ok:
-            raise RuntimeError(f"Verify request failed ({response.status_code}): {response.text}")
-
         try:
-            return response.json()
+            body = response.json()
         except Exception:
-            return response.text
+            body = {"message": response.text}
+
+        if not response.ok:
+            raise VerificationError(response.status_code, body)
+
+        return body

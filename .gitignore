@@ -5,3 +5,6 @@ node_modules/
 translated/
 vault/
 target
+
+__pycache__/
+.venv/

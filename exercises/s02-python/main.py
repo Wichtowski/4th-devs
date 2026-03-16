@@ -4,6 +4,11 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+_ROOT_DIR = Path(__file__).resolve().parent
+_SRC_DIR = _ROOT_DIR / "src"
+if _SRC_DIR.exists():
+    sys.path.insert(0, str(_SRC_DIR))
+
 _EXERCISES_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(_EXERCISES_DIR / ".env")
 
