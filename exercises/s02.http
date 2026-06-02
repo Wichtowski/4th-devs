@@ -1,4 +1,5 @@
 @baseUrl = https://hub.ag3nts.org
+@cell = 1x1
 
 ### Verify example task
 # @name verify-string
@@ -11,3 +12,28 @@ Content-Type: application/json
   "answer": ""
 }
 
+
+### Electricity — current board (JSON)
+# @name electricity-json
+GET {{baseUrl}}/data/{{$dotenv DEVS_KEY}}/electricity.json
+
+### Electricity — current board (PNG)
+# @name electricity-png
+GET {{baseUrl}}/data/{{$dotenv DEVS_KEY}}/electricity.png
+
+### Electricity — reset board
+# @name electricity-reset
+GET {{baseUrl}}/data/{{$dotenv DEVS_KEY}}/electricity.png?reset=1
+
+### Electricity — rotate one cell (90° CW)
+# @name electricity-rotate
+POST {{baseUrl}}/verify
+Content-Type: application/json
+
+{
+  "apikey": "{{$dotenv DEVS_KEY}}",
+  "task": "electricity",
+  "answer": {
+    "rotate": "{{cell}}"
+  }
+}

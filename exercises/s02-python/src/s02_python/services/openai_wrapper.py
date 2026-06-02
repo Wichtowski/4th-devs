@@ -115,6 +115,13 @@ class OpenAiWrapper:
 
         return value
 
+def extract_tool_calls(response: dict[str, Any]) -> list[dict[str, Any]]:
+    output = response.get("output")
+    if not isinstance(output, list):
+        return []
+    return [item for item in output if isinstance(item, dict) and item.get("type") == "function_call"]
+
+
 def extract_response_text(response: dict[str, Any]) -> str | None:
     output_text = response.get("output_text")
     if isinstance(output_text, str) and output_text.strip():
