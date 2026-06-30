@@ -1,0 +1,10 @@
+{
+  "name": "s03-js",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "JavaScript services scaffold for exercise set 03",
+  "engines": {
+    "node": ">=24"
+  }
+}
