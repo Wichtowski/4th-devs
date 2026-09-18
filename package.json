@@ -69,6 +69,7 @@
     "s03:e01": "node ./exercises/s03-js/E01/app.js",
     "s03:e02": "node ./exercises/s03-js/E02/app.js",
     "s03:e03": "node ./exercises/s03-js/E03/app.js",
+    "s03:e04": "node ./exercises/s03-js/E04/app.js",
     "prelesson19:system": "npm run ensure:files-mcp",
     "lesson19:system": "node ./04_04_system/app.js",
     "prelesson19:daily-news": "npm run ensure:files-mcp",
